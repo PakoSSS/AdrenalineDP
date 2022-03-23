@@ -7,10 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AdrenalineDP.Data;
 using AdrenalineDP.Entities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AdrenalineDP.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class ServicesController : Controller
     {
         private readonly ApplicationDbContext _context;

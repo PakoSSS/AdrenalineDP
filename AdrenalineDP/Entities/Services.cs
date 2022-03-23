@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -25,7 +24,7 @@ namespace AdrenalineDP.Entities
         [Required]
         [DataType(DataType.Date)]
         public DateTime DateJoined { get; set; }
-      
+
         public virtual ICollection<Media> Medias { get; set; }
     }
 }

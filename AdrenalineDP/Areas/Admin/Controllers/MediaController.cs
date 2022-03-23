@@ -7,10 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AdrenalineDP.Data;
 using AdrenalineDP.Entities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AdrenalineDP.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class MediaController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -23,7 +25,8 @@ namespace AdrenalineDP.Areas.Admin.Controllers
         // GET: Admin/Media
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Media.ToListAsync());
+            var applicationDbContext = _context.Media.Include(m => m.Service);
+            return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Admin/Media/Details/5
@@ -35,6 +38,7 @@ namespace AdrenalineDP.Areas.Admin.Controllers
             }
 
             var media = await _context.Media
+                .Include(m => m.Service)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (media == null)
             {
@@ -47,6 +51,7 @@ namespace AdrenalineDP.Areas.Admin.Controllers
         // GET: Admin/Media/Create
         public IActionResult Create()
         {
+            ViewData["ServiceId"] = new SelectList(_context.Services, "Id", "Name");
             return View();
         }
 
@@ -63,6 +68,7 @@ namespace AdrenalineDP.Areas.Admin.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["ServiceId"] = new SelectList(_context.Services, "Id", "Name", media.ServiceId);
             return View(media);
         }
 
@@ -79,6 +85,7 @@ namespace AdrenalineDP.Areas.Admin.Controllers
             {
                 return NotFound();
             }
+            ViewData["ServiceId"] = new SelectList(_context.Services, "Id", "Name", media.ServiceId);
             return View(media);
         }
 
@@ -114,6 +121,7 @@ namespace AdrenalineDP.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["ServiceId"] = new SelectList(_context.Services, "Id", "Name", media.ServiceId);
             return View(media);
         }
 
@@ -126,6 +134,7 @@ namespace AdrenalineDP.Areas.Admin.Controllers
             }
 
             var media = await _context.Media
+                .Include(m => m.Service)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (media == null)
             {

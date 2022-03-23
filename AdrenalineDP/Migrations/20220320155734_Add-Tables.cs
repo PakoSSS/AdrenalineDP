@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AdrenalineDP.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class AddTables : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -197,7 +197,6 @@ namespace AdrenalineDP.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     ServiceId = table.Column<int>(type: "int", nullable: false),
-                    ServicesId = table.Column<int>(type: "int", nullable: true),
                     Category = table.Column<int>(type: "int", nullable: false),
                     FilePath = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false)
@@ -206,11 +205,11 @@ namespace AdrenalineDP.Migrations
                 {
                     table.PrimaryKey("PK_Media", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Media_Services_ServicesId",
-                        column: x => x.ServicesId,
+                        name: "FK_Media_Services_ServiceId",
+                        column: x => x.ServiceId,
                         principalTable: "Services",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -219,8 +218,7 @@ namespace AdrenalineDP.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UsersId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     ServiceId = table.Column<int>(type: "int", nullable: false),
                     ReserveDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Message = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
@@ -230,8 +228,8 @@ namespace AdrenalineDP.Migrations
                 {
                     table.PrimaryKey("PK_ServiceRequests", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ServiceRequests_AspNetUsers_UsersId",
-                        column: x => x.UsersId,
+                        name: "FK_ServiceRequests_AspNetUsers_UserId",
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -283,9 +281,9 @@ namespace AdrenalineDP.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Media_ServicesId",
+                name: "IX_Media_ServiceId",
                 table: "Media",
-                column: "ServicesId");
+                column: "ServiceId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ServiceRequests_ServiceId",
@@ -293,9 +291,9 @@ namespace AdrenalineDP.Migrations
                 column: "ServiceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ServiceRequests_UsersId",
+                name: "IX_ServiceRequests_UserId",
                 table: "ServiceRequests",
-                column: "UsersId");
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

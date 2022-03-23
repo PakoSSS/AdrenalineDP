@@ -10,15 +10,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AdrenalineDP.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220314164259_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20220321155542_UserYt")]
+    partial class UserYt
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.11")
+                .HasAnnotation("ProductVersion", "5.0.12")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("AdrenalineDP.Entities.Instructors", b =>
@@ -73,9 +73,6 @@ namespace AdrenalineDP.Migrations
                     b.Property<int>("ServiceId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ServicesId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -83,7 +80,7 @@ namespace AdrenalineDP.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ServicesId");
+                    b.HasIndex("ServiceId");
 
                     b.ToTable("Media");
                 });
@@ -110,16 +107,14 @@ namespace AdrenalineDP.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UsersId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ServiceId");
 
-                    b.HasIndex("UsersId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("ServiceRequests");
                 });
@@ -204,9 +199,6 @@ namespace AdrenalineDP.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
-
-                    b.Property<int>("Role")
-                        .HasColumnType("int");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
@@ -368,11 +360,13 @@ namespace AdrenalineDP.Migrations
 
             modelBuilder.Entity("AdrenalineDP.Entities.Media", b =>
                 {
-                    b.HasOne("AdrenalineDP.Entities.Services", "Services")
+                    b.HasOne("AdrenalineDP.Entities.Services", "Service")
                         .WithMany("Medias")
-                        .HasForeignKey("ServicesId");
+                        .HasForeignKey("ServiceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("Services");
+                    b.Navigation("Service");
                 });
 
             modelBuilder.Entity("AdrenalineDP.Entities.ServiceRequest", b =>
@@ -383,13 +377,15 @@ namespace AdrenalineDP.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("AdrenalineDP.Entities.Users", "Users")
+                    b.HasOne("AdrenalineDP.Entities.Users", "User")
                         .WithMany("Requests")
-                        .HasForeignKey("UsersId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Service");
 
-                    b.Navigation("Users");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

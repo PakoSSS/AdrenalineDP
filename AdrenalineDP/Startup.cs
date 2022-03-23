@@ -33,10 +33,10 @@ namespace AdrenalineDP
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-            services.AddDefaultIdentity<Users>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<Users>(options => options.SignIn.RequireConfirmedAccount = false)
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders() ;
-
+                .AddDefaultTokenProviders() ;               
             services.AddControllersWithViews();
         }
 

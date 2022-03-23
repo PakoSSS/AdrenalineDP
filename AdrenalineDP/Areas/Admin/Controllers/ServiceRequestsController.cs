@@ -7,10 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AdrenalineDP.Data;
 using AdrenalineDP.Entities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AdrenalineDP.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class ServiceRequestsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -23,7 +25,7 @@ namespace AdrenalineDP.Areas.Admin.Controllers
         // GET: Admin/ServiceRequests
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.ServiceRequests.Include(s => s.Service);
+            var applicationDbContext = _context.ServiceRequests.Include(s => s.Service).Include(s => s.User);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -37,6 +39,7 @@ namespace AdrenalineDP.Areas.Admin.Controllers
 
             var serviceRequest = await _context.ServiceRequests
                 .Include(s => s.Service)
+                .Include(s => s.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (serviceRequest == null)
             {
@@ -50,6 +53,7 @@ namespace AdrenalineDP.Areas.Admin.Controllers
         public IActionResult Create()
         {
             ViewData["ServiceId"] = new SelectList(_context.Services, "Id", "Name");
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
 
@@ -67,6 +71,7 @@ namespace AdrenalineDP.Areas.Admin.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ServiceId"] = new SelectList(_context.Services, "Id", "Name", serviceRequest.ServiceId);
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", serviceRequest.UserId);
             return View(serviceRequest);
         }
 
@@ -84,6 +89,7 @@ namespace AdrenalineDP.Areas.Admin.Controllers
                 return NotFound();
             }
             ViewData["ServiceId"] = new SelectList(_context.Services, "Id", "Name", serviceRequest.ServiceId);
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", serviceRequest.UserId);
             return View(serviceRequest);
         }
 
@@ -120,6 +126,7 @@ namespace AdrenalineDP.Areas.Admin.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ServiceId"] = new SelectList(_context.Services, "Id", "Name", serviceRequest.ServiceId);
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", serviceRequest.UserId);
             return View(serviceRequest);
         }
 
@@ -133,6 +140,7 @@ namespace AdrenalineDP.Areas.Admin.Controllers
 
             var serviceRequest = await _context.ServiceRequests
                 .Include(s => s.Service)
+                .Include(s => s.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (serviceRequest == null)
             {

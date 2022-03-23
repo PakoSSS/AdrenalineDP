@@ -1,4 +1,15 @@
-﻿<li class="nav-item dropdown show" data>
+﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore
+@using AdrenalineDP.Data
+@using AdrenalineDP.Entities
+
+
+@inject SignInManager<Users> SignInManager
+@inject UserManager<Users> UserManager
+
+@if (SignInManager.IsSignedIn(User) && await UserManager.IsInRoleAsync(UserManager.GetUserAsync(User).Result,"admin"))
+{
+<li class="nav-item dropdown show" data>
     <a class="dropdown-toggle nav-link text-dark" href="#" data-toggle="dropdown">Admin</a>
     <div class="dropdown-menu">
         <a class="dropdown-item" asp-area="Admin" asp-controller="Services" asp-action="Index">Services</a>
@@ -7,3 +18,4 @@
         <a class="dropdown-item" asp-area="Admin" asp-controller="ServiceRequests" asp-action="Index">Requests</a>
     </div>
 </li>
+}
