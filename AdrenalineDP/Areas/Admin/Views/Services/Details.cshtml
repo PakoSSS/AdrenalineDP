@@ -1,5 +1,6 @@
 ﻿@model AdrenalineDP.Entities.Services
 
+
 @{
     ViewData["Title"] = "Details";
 }
@@ -8,6 +9,7 @@
 
 <div>
     <h4>Services</h4>
+    
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -28,12 +30,16 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Location)
         </dd>
+
+
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.ImageURL)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ImageURL)
+            <img src="@Model.ImageURL" class="img-fluid" alt="Responsive image"> 
         </dd>
+
+
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Price)
         </dt>

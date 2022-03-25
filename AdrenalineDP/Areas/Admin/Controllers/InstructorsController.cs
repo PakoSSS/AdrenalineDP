@@ -11,6 +11,7 @@ using AdrenalineDP.Entities;
 namespace AdrenalineDP.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    
     public class InstructorsController : Controller
     {
         private readonly ApplicationDbContext _context;

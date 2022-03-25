@@ -36,7 +36,8 @@ namespace AdrenalineDP
             services.AddDefaultIdentity<Users>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders() ;               
+                .AddDefaultTokenProviders();
+                
             services.AddControllersWithViews();
         }
 

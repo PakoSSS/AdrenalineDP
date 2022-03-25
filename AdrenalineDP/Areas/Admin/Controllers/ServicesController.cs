@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace AdrenalineDP.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin")]
+    [Authorize]
     public class ServicesController : Controller
     {
         private readonly ApplicationDbContext _context;

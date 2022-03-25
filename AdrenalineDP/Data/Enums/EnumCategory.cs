@@ -5,5 +5,5 @@ using System.Threading.Tasks;
 
 namespace AdrenalineDP.Data.Enums
 {
-    public enum Category { Video, Photos }
+    public enum Category { Видео, Снимка }
 }
