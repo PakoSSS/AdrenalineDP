@@ -9,26 +9,26 @@ using AdrenalineDP.Data;
 using AdrenalineDP.Entities;
 using Microsoft.AspNetCore.Authorization;
 
-namespace AdrenalineDP.Areas.Admin.Controllers
+namespace AdrenalineDP.Controllers
 {
-    [Area("Admin")]
     [Authorize]
-    public class ServicesController : Controller
+    public class ServiceRequestsController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public ServicesController(ApplicationDbContext context)
+        public ServiceRequestsController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Admin/Services
+        // GET: ServiceRequests
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Services.ToListAsync());
+            var applicationDbContext = _context.ServiceRequests.Include(s => s.Service).Include(s => s.User);
+            return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: Admin/Services/Details/5
+        // GET: ServiceRequests/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -36,39 +36,45 @@ namespace AdrenalineDP.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var services = await _context.Services
+            var serviceRequest = await _context.ServiceRequests
+                .Include(s => s.Service)
+                .Include(s => s.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (services == null)
+            if (serviceRequest == null)
             {
                 return NotFound();
             }
 
-            return View(services);
+            return View(serviceRequest);
         }
 
-        // GET: Admin/Services/Create
+        // GET: ServiceRequests/Create
         public IActionResult Create()
         {
+            ViewData["ServiceId"] = new SelectList(_context.Services, "Id", "Name");
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Full_Name");
             return View();
         }
 
-        // POST: Admin/Services/Create
+        // POST: ServiceRequests/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description,Location,ImageURL,Price,DateJoined")] Services services)
+        public async Task<IActionResult> Create([Bind("Id,UserId,ServiceId,ReserveDate,Message,RegisterDate")] ServiceRequest serviceRequest)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(services);
+                _context.Add(serviceRequest);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(services);
+            ViewData["ServiceId"] = new SelectList(_context.Services, "Id", "Name", serviceRequest.ServiceId);
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Full_Name", serviceRequest.UserId);
+            return View(serviceRequest);
         }
 
-        // GET: Admin/Services/Edit/5
+        // GET: ServiceRequests/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -76,22 +82,24 @@ namespace AdrenalineDP.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var services = await _context.Services.FindAsync(id);
-            if (services == null)
+            var serviceRequest = await _context.ServiceRequests.FindAsync(id);
+            if (serviceRequest == null)
             {
                 return NotFound();
             }
-            return View(services);
+            ViewData["ServiceId"] = new SelectList(_context.Services, "Id", "Name", serviceRequest.ServiceId);
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Full_Name", serviceRequest.UserId);
+            return View(serviceRequest);
         }
 
-        // POST: Admin/Services/Edit/5
+        // POST: ServiceRequests/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,Location,ImageURL,Price,DateJoined")] Services services)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,UserId,ServiceId,ReserveDate,Message,RegisterDate")] ServiceRequest serviceRequest)
         {
-            if (id != services.Id)
+            if (id != serviceRequest.Id)
             {
                 return NotFound();
             }
@@ -100,12 +108,12 @@ namespace AdrenalineDP.Areas.Admin.Controllers
             {
                 try
                 {
-                    _context.Update(services);
+                    _context.Update(serviceRequest);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ServicesExists(services.Id))
+                    if (!ServiceRequestExists(serviceRequest.Id))
                     {
                         return NotFound();
                     }
@@ -116,10 +124,12 @@ namespace AdrenalineDP.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(services);
+            ViewData["ServiceId"] = new SelectList(_context.Services, "Id", "Name", serviceRequest.ServiceId);
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Full_Name", serviceRequest.UserId);
+            return View(serviceRequest);
         }
 
-        // GET: Admin/Services/Delete/5
+        // GET: ServiceRequests/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -127,30 +137,32 @@ namespace AdrenalineDP.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var services = await _context.Services
+            var serviceRequest = await _context.ServiceRequests
+                .Include(s => s.Service)
+                .Include(s => s.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (services == null)
+            if (serviceRequest == null)
             {
                 return NotFound();
             }
 
-            return View(services);
+            return View(serviceRequest);
         }
 
-        // POST: Admin/Services/Delete/5
+        // POST: ServiceRequests/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var services = await _context.Services.FindAsync(id);
-            _context.Services.Remove(services);
+            var serviceRequest = await _context.ServiceRequests.FindAsync(id);
+            _context.ServiceRequests.Remove(serviceRequest);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ServicesExists(int id)
+        private bool ServiceRequestExists(int id)
         {
-            return _context.Services.Any(e => e.Id == id);
+            return _context.ServiceRequests.Any(e => e.Id == id);
         }
     }
 }

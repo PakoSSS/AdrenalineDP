@@ -8,10 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using AdrenalineDP.Data;
 using AdrenalineDP.Entities;
 
-namespace AdrenalineDP.Areas.Admin.Controllers
+namespace AdrenalineDP.Controllers
 {
-    [Area("Admin")]
-    
     public class InstructorsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -21,13 +19,13 @@ namespace AdrenalineDP.Areas.Admin.Controllers
             _context = context;
         }
 
-        // GET: Admin/Instructors
+        // GET: Instructors
         public async Task<IActionResult> Index()
         {
             return View(await _context.Instructors.ToListAsync());
         }
 
-        // GET: Admin/Instructors/Details/5
+        // GET: Instructors/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -45,13 +43,13 @@ namespace AdrenalineDP.Areas.Admin.Controllers
             return View(instructors);
         }
 
-        // GET: Admin/Instructors/Create
+        // GET: Instructors/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Admin/Instructors/Create
+        // POST: Instructors/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -67,7 +65,7 @@ namespace AdrenalineDP.Areas.Admin.Controllers
             return View(instructors);
         }
 
-        // GET: Admin/Instructors/Edit/5
+        // GET: Instructors/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -83,7 +81,7 @@ namespace AdrenalineDP.Areas.Admin.Controllers
             return View(instructors);
         }
 
-        // POST: Admin/Instructors/Edit/5
+        // POST: Instructors/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -118,7 +116,7 @@ namespace AdrenalineDP.Areas.Admin.Controllers
             return View(instructors);
         }
 
-        // GET: Admin/Instructors/Delete/5
+        // GET: Instructors/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -136,7 +134,7 @@ namespace AdrenalineDP.Areas.Admin.Controllers
             return View(instructors);
         }
 
-        // POST: Admin/Instructors/Delete/5
+        // POST: Instructors/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

@@ -1,0 +1,78 @@
+﻿@model IEnumerable<AdrenalineDP.Entities.Services>
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore
+@using AdrenalineDP.Data
+@using AdrenalineDP.Entities
+
+
+@inject SignInManager<Users> SignInManager
+@inject UserManager<Users> UserManager
+
+@{
+    ViewData["Title"] = "Index";
+}
+ 
+
+<h1>Услуги</h1>
+
+@if (SignInManager.IsSignedIn(User) && await UserManager.IsInRoleAsync(UserManager.GetUserAsync(User).Result, "admin"))
+{
+    <p>
+        <a asp-action="Create" class="btn btn-outline-success">Създай услуга</a>
+    </p>
+    <br />
+    <div class="text-center">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-6">
+                    <div class="card" style="width: 35rem;margin:1rem;">
+                        <img class="card-img-top" src="@item.ImageURL" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">@item.Name</h5>
+                            <p class="card-text">@item.Description</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Цена : @item.Price лв.</li>
+                            <li class="list-group-item">Местоположение : @item.Location</li>
+                        </ul>
+                        <div class="card-body">
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-primary">Редактиране</a>
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-secondary">Детайли</a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger text">Изтриване</a>
+
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+
+}
+else
+{
+    <br />
+    <div class="text-center">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-6">
+                    <a asp-action="Details" asp-route-id="@item.Id" class="nav-link text-dark">
+                        <div class="card" style="width: 35rem;margin:1rem;">
+                            <img class="card-img-top" src="@item.ImageURL" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">@item.Name</h5>
+                                <p class="card-text">@item.Description</p>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Цена : @item.Price лв.</li>
+                                <li class="list-group-item">Местоположение : @item.Location</li>
+                            </ul>
+                        </div>
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+}

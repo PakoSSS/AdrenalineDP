@@ -9,29 +9,25 @@ using AdrenalineDP.Data;
 using AdrenalineDP.Entities;
 using Microsoft.AspNetCore.Authorization;
 
-namespace AdrenalineDP.Areas.Admin.Controllers
+namespace AdrenalineDP.Controllers
 {
-    [Area("Admin")]
     [Authorize]
-    public class MediaController : Controller
+    public class ServicesController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public MediaController(ApplicationDbContext context)
+        public ServicesController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        
-
-        // GET: Admin/Media
+        // GET: Services
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Media.Include(m => m.Service);
-            return View(await applicationDbContext.ToListAsync());
+            return View(await _context.Services.ToListAsync());
         }
 
-        // GET: Admin/Media/Details/5
+        // GET: Services/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -39,42 +35,39 @@ namespace AdrenalineDP.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var media = await _context.Media
-                .Include(m => m.Service)
+            var services = await _context.Services
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (media == null)
+            if (services == null)
             {
                 return NotFound();
             }
 
-            return View(media);
+            return View(services);
         }
 
-        // GET: Admin/Media/Create
+        // GET: Services/Create
         public IActionResult Create()
         {
-            ViewData["ServiceId"] = new SelectList(_context.Services, "Id", "Name");
             return View();
         }
 
-        // POST: Admin/Media/Create
+        // POST: Services/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,ServiceId,Category,FilePath,Date")] Media media)
+        public async Task<IActionResult> Create([Bind("Id,Name,Description,Location,ImageURL,Price,DateJoined")] Services services)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(media);
+                _context.Add(services);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ServiceId"] = new SelectList(_context.Services, "Id", "Name", media.ServiceId);
-            return View(media);
+            return View(services);
         }
 
-        // GET: Admin/Media/Edit/5
+        // GET: Services/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -82,23 +75,22 @@ namespace AdrenalineDP.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var media = await _context.Media.FindAsync(id);
-            if (media == null)
+            var services = await _context.Services.FindAsync(id);
+            if (services == null)
             {
                 return NotFound();
             }
-            ViewData["ServiceId"] = new SelectList(_context.Services, "Id", "Name", media.ServiceId);
-            return View(media);
+            return View(services);
         }
 
-        // POST: Admin/Media/Edit/5
+        // POST: Services/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,ServiceId,Category,FilePath,Date")] Media media)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,Location,ImageURL,Price,DateJoined")] Services services)
         {
-            if (id != media.Id)
+            if (id != services.Id)
             {
                 return NotFound();
             }
@@ -107,12 +99,12 @@ namespace AdrenalineDP.Areas.Admin.Controllers
             {
                 try
                 {
-                    _context.Update(media);
+                    _context.Update(services);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!MediaExists(media.Id))
+                    if (!ServicesExists(services.Id))
                     {
                         return NotFound();
                     }
@@ -123,11 +115,10 @@ namespace AdrenalineDP.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ServiceId"] = new SelectList(_context.Services, "Id", "Name", media.ServiceId);
-            return View(media);
+            return View(services);
         }
 
-        // GET: Admin/Media/Delete/5
+        // GET: Services/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -135,31 +126,30 @@ namespace AdrenalineDP.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var media = await _context.Media
-                .Include(m => m.Service)
+            var services = await _context.Services
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (media == null)
+            if (services == null)
             {
                 return NotFound();
             }
 
-            return View(media);
+            return View(services);
         }
 
-        // POST: Admin/Media/Delete/5
+        // POST: Services/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var media = await _context.Media.FindAsync(id);
-            _context.Media.Remove(media);
+            var services = await _context.Services.FindAsync(id);
+            _context.Services.Remove(services);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool MediaExists(int id)
+        private bool ServicesExists(int id)
         {
-            return _context.Media.Any(e => e.Id == id);
+            return _context.Services.Any(e => e.Id == id);
         }
     }
 }
