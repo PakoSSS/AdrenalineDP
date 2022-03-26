@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace AdrenalineDP.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin")]
+    [Authorize]
     public class MediaController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -21,6 +21,8 @@ namespace AdrenalineDP.Areas.Admin.Controllers
         {
             _context = context;
         }
+
+        
 
         // GET: Admin/Media
         public async Task<IActionResult> Index()
