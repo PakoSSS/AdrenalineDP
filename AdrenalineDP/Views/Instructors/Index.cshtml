@@ -1,59 +1,85 @@
 ﻿@model IEnumerable<AdrenalineDP.Entities.Instructors>
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore
+@using AdrenalineDP.Data
+@using AdrenalineDP.Entities
+
+
+@inject SignInManager<Users> SignInManager
+@inject UserManager<Users> UserManager
+
 
 @{
     ViewData["Title"] = "Index";
 }
+<style>
+    img {
+        object-fit: cover;
+        height: 15.5rem;
+    }
+</style>
+@if (SignInManager.IsSignedIn(User) && await UserManager.IsInRoleAsync(UserManager.GetUserAsync(User).Result, "admin"))
+{
 
-<h1>Инструктори</h1>
 
-<p>
-    <a asp-action="Create">Добавяне на инструктор</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ImageURL)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RegisterDate)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ImageURL)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RegisterDate)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
+    <h1>Инструктори</h1>
+
+    <p>
+        <a asp-action="Create" class="btn btn-outline-dark">Добавяне на инструктор</a>
+    </p>
+    <br />
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-4">
+                <div class="card" style="width: 23rem;margin:1rem;">
+                    <img class="card-img-top" src="@item.ImageURL" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.FirstName @item.LastName</h5>
+                        <p class="card-text">Квалификация : @item.Description</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Дата на регистрация : @item.RegisterDate</li>
+                    </ul>
+                    <div class="card-body">
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-primary">Редактиране</a>
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-secondary">Детайли</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger text">Изтриване</a>
+
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
 }
-    </tbody>
-</table>
+else
+{
+    <div class="text-center">
+        <h1>Нашите прекрасни инструктори!</h1>
+        <p>
+            Всеки един от нашите инструктори е доказал своите знания и способности в своята професионална област.<br />
+            Ако ви е нужна помощ и подкрепа в дадено съоръжение,не се колебайте и се свържете с тях!
+            Ще бъдете посрещнати с точна информация и голяма топла усмивка!
+        </p>
+
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-4">
+                    <div class="card" style="width: 23rem;margin:1rem;">
+                        <img class="card-img-top" src="@item.ImageURL" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">@item.FirstName @item.LastName</h5>
+                            <p class="card-text">Квалификация : @item.Description</p>
+                        </div>
+
+
+                    </div>
+                </div>
+            }
+        </div>
+
+    </div>
+
+}

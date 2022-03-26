@@ -27,23 +27,31 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
+
+                        @if (User.IsInRole("Admin") == false)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="ServiceRequests" asp-action="Create">РЕЗЕРВАЦИЯ</a>
+                            </li>
+                        }
+
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Начало</a>
                         </li>
                         @if (User.IsInRole("Admin") == false)
                         {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="ServiceRequests" asp-action="Create">Резервирай!</a>
-                            </li>
+
+
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-controller="Services" asp-action="Index">Услуги</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-controller="Media" asp-action="Index">Галерия</a>
                             </li>
-
-
+                           <partial name="_AboutUsPartial" />
                         }
+
+
 
                         <partial name="_AdminMenu" />
                     </ul>

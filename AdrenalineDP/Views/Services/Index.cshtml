@@ -11,7 +11,7 @@
 @{
     ViewData["Title"] = "Index";
 }
- 
+
 
 <h1>Услуги</h1>
 
@@ -35,6 +35,7 @@
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">Цена : @item.Price лв.</li>
                             <li class="list-group-item">Местоположение : @item.Location</li>
+
                         </ul>
                         <div class="card-body">
                             <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-primary">Редактиране</a>
@@ -58,9 +59,16 @@ else
             @foreach (var item in Model)
             {
                 <div class="col-6">
-                    <a asp-action="Details" asp-route-id="@item.Id" class="nav-link text-dark">
-                        <div class="card" style="width: 35rem;margin:1rem;">
+
+                    <div class="card" style="width: 35rem;margin:1rem;">
+                        <a asp-action="Details" asp-route-id="@item.Id" class="nav-link text-dark">
                             <img class="card-img-top" src="@item.ImageURL" alt="Card image cap">
+                        </a>
+
+                        <div class="card-body text">
+                            <a asp-controller="ServiceRequests" asp-action="Create" class="btn btn-outline-success" style="width:100%">Резервирай</a>
+                        </div>
+                        <a asp-action="Details" asp-route-id="@item.Id" class="nav-link text-dark">
                             <div class="card-body">
                                 <h5 class="card-title">@item.Name</h5>
                                 <p class="card-text">@item.Description</p>
@@ -69,8 +77,11 @@ else
                                 <li class="list-group-item">Цена : @item.Price лв.</li>
                                 <li class="list-group-item">Местоположение : @item.Location</li>
                             </ul>
-                        </div>
-                    </a>
+
+                        </a>
+                    </div>
+
+
                 </div>
             }
         </div>
