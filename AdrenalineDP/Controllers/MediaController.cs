@@ -11,7 +11,8 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace AdrenalineDP.Controllers
 {
-    [Authorize]
+     
+     
     public class MediaController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -20,7 +21,17 @@ namespace AdrenalineDP.Controllers
         {
             _context = context;
         }
+        public async Task<IActionResult> Gallery()
+        {
 
+            var applicationDbContext = _context.Media.Include(m => m.Service);
+            return View(await applicationDbContext.ToListAsync());
+        }
+        public async Task<IActionResult> Video()
+        {
+            var applicationDbContext = _context.Media.Include(m => m.Service);
+            return View(await applicationDbContext.ToListAsync());
+        }
         // GET: Media
         public async Task<IActionResult> Index()
         {

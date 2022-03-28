@@ -1,0 +1,38 @@
+﻿@model IEnumerable<AdrenalineDP.Entities.Media>
+@using AdrenalineDP.Data
+@using AdrenalineDP.Entities
+
+
+<style>
+    .card {
+        width: 30rem;
+        margin: 1rem;
+        height: 30rem;
+        object-fit: cover;
+    }
+</style>
+
+<div class="text-center">
+    <h1>Видео</h1>
+</div>
+<br />
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        @if (item.Category == AdrenalineDP.Data.Enums.Category.Видео)
+        {
+            
+            if (item.Service.Name == "Мотокрос")
+            {
+
+                <div class="col-6">
+                    <video class="card" controls>
+                        <source src="@item.FilePath" type="video/mp4" />
+                    </video>
+                </div>
+            }
+        }
+    }
+</div>
+
