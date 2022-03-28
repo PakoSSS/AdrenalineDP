@@ -26,11 +26,10 @@
             if (item.Service.Name == "Мотокрос")
             {
 
-                <div class="col-6">
-                    <video class="card" controls>
-                        <source src="@item.FilePath" type="video/mp4" />
-                    </video>
-                </div>
+           <iframe width="300" height="200"
+            src="@item.FilePath" title="YouTube video player" style="margin:6px;" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>
             }
         }
     }

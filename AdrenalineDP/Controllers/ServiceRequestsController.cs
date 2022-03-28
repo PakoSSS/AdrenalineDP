@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using AdrenalineDP.Data;
 using AdrenalineDP.Entities;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace AdrenalineDP.Controllers
 {
@@ -15,11 +16,12 @@ namespace AdrenalineDP.Controllers
     public class ServiceRequestsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<Users> _userManager;
 
-
-        public ServiceRequestsController(ApplicationDbContext context)
+        public ServiceRequestsController(ApplicationDbContext context,UserManager<Users> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: ServiceRequests
@@ -68,10 +70,20 @@ namespace AdrenalineDP.Controllers
             {
                 _context.Add(serviceRequest);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (User.IsInRole("Admin"))
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    
+                    return RedirectToAction("Index","Home");                    
+                }
+
             }
             ViewData["ServiceId"] = new SelectList(_context.Services, "Id", "Name", serviceRequest.ServiceId);
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Full_Name", serviceRequest.UserId);
+             
             return View(serviceRequest);
         }
 
