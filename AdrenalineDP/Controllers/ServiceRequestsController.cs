@@ -18,7 +18,7 @@ namespace AdrenalineDP.Controllers
         private readonly ApplicationDbContext _context;
         private readonly UserManager<Users> _userManager;
 
-        public ServiceRequestsController(ApplicationDbContext context,UserManager<Users> userManager)
+        public ServiceRequestsController(ApplicationDbContext context, UserManager<Users> userManager)
         {
             _context = context;
             _userManager = userManager;
@@ -76,14 +76,14 @@ namespace AdrenalineDP.Controllers
                 }
                 else
                 {
-                    
-                    return RedirectToAction("Index","Home");                    
+
+                    return RedirectToAction("Index", "Home");
                 }
 
             }
             ViewData["ServiceId"] = new SelectList(_context.Services, "Id", "Name", serviceRequest.ServiceId);
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Full_Name", serviceRequest.UserId);
-             
+
             return View(serviceRequest);
         }
 
