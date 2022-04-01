@@ -27,6 +27,7 @@ namespace AdrenalineDP.Controllers
         // GET: ServiceRequests
         public async Task<IActionResult> Index()
         {
+            
             var applicationDbContext = _context.ServiceRequests.Include(s => s.Service).Include(s => s.User);
             return View(await applicationDbContext.ToListAsync());
         }
