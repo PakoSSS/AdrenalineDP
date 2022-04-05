@@ -27,7 +27,8 @@ namespace AdrenalineDP.Controllers
         // GET: ServiceRequests
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.ServiceRequests.Include(s => s.Service).Include(s => s.User);
+           
+            var applicationDbContext = _context.ServiceRequests.Include(s => s.Service).Include(s => s.User);        
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -83,7 +84,7 @@ namespace AdrenalineDP.Controllers
             }
             ViewData["ServiceId"] = new SelectList(_context.Services, "Id", "Name", serviceRequest.ServiceId);
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Full_Name", serviceRequest.UserId);
-
+            
             return View(serviceRequest);
         }
 
