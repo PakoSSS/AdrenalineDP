@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace AdrenalineDP.Controllers
 {
-    [Authorize]
+    
     public class ServicesController : Controller
     {
         private readonly ApplicationDbContext _context;

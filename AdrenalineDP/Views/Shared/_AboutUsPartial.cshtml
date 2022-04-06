@@ -1,9 +1,21 @@
-﻿<li class="nav-item dropdown show" data>
-    <a class="dropdown-toggle nav-link text-dark" href="#" data-toggle="dropdown">Още</a>
+﻿<style>
+    .dropdown-menu {
+        background: #dc3545;
+      
+    }
+    .dropdown-item:hover {
+        background-color: rgb(83 39 39);
+        text-shadow: rgb(83 39 39);
+    }
+     
+</style>
+
+<li class="nav-item dropdown show" data>
+    <a class="dropdown-toggle nav-link text-light" href="#" data-toggle="dropdown">Още</a>
     <div class="dropdown-menu">
-        <a class="dropdown-item" asp-area="" asp-controller="Instructors" asp-action="Index">Инструктори</a>
-        <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Contacts">Контакти</a>
-        <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="AboutUs">За нас</a>
+        <a class="dropdown-item text-light" asp-area="" asp-controller="Instructors" asp-action="Index">Инструктори</a>
+        <a class="dropdown-item text-light" asp-area="" asp-controller="Home" asp-action="Contacts">Контакти</a>
+        <a class="dropdown-item text-light" asp-area="" asp-controller="Home" asp-action="AboutUs">За нас</a>
 
     </div>
 </li>

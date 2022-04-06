@@ -7,15 +7,27 @@
 @inject SignInManager<Users> SignInManager
 @inject UserManager<Users> UserManager
 
+
+    <style>
+        .dropdown-menu {
+            background: #dc3545;
+        }
+
+        .dropdown-item:hover {
+            background-color: rgb(83 39 39);
+            text-shadow: rgb(83 39 39);
+        }
+    </style>
+
 @if (SignInManager.IsSignedIn(User) && await UserManager.IsInRoleAsync(UserManager.GetUserAsync(User).Result,"admin"))
 {
 <li class="nav-item dropdown show" data>
-    <a class="dropdown-toggle nav-link text-dark" href="#" data-toggle="dropdown">Администрация</a>
+    <a class="dropdown-toggle nav-link text-light" href="#" data-toggle="dropdown">Администрация</a>
     <div class="dropdown-menu">
-        <a class="dropdown-item" asp-area="" asp-controller="Services" asp-action="Index">Услуги</a>
-        <a class="dropdown-item" asp-area="" asp-controller="Instructors" asp-action="Index">Инструктори</a>
-        <a class="dropdown-item" asp-area="" asp-controller="Media" asp-action="Index">Медия</a>
-        <a class="dropdown-item" asp-area="" asp-controller="ServiceRequests" asp-action="Index">Резервации</a>
+        <a class="dropdown-item text-light" asp-area="" asp-controller="Services" asp-action="Index">Услуги</a>
+        <a class="dropdown-item text-light" asp-area="" asp-controller="Instructors" asp-action="Index">Инструктори</a>
+        <a class="dropdown-item text-light" asp-area="" asp-controller="Media" asp-action="Index">Медия</a>
+        <a class="dropdown-item text-light" asp-area="" asp-controller="ServiceRequests" asp-action="Index">Резервации</a>
     </div>
 </li>
 }

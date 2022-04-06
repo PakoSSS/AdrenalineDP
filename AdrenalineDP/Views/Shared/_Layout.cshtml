@@ -16,18 +16,20 @@
             background-size:cover;
         }
         footer {
-            background: linear-gradient(to bottom, #ff6699 0%, #ff9933 100%);
+            background: #dc3545;
         }
+        
     </style>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Адреналин</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link href="~/lib/font-awesome/css/all.css" rel="stylesheet" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-danger border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Адреналин</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -40,25 +42,25 @@
                         @if (User.IsInRole("Admin") == false)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="ServiceRequests" asp-action="Create">РЕЗЕРВАЦИЯ</a>
+                                <a class="nav-link text-light" asp-controller="ServiceRequests" asp-action="Create">РЕЗЕРВАЦИЯ</a>
                             </li>
                         }
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Начало</a>
+                            <a class="nav-link text-monospace text-light" asp-area="" asp-controller="Home" asp-action="Index">Начало</a>
                         </li>
                         @if (User.IsInRole("Admin") == false)
                         {
 
 
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Services" asp-action="Index">Услуги</a>
+                                <a class="nav-link text-light" asp-controller="Services" asp-action="Index">Услуги</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Media" asp-action="Gallery">Галерия</a>
+                                <a class="nav-link text-light" asp-controller="Media" asp-action="Gallery">Галерия</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Media" asp-action="Video">Видео</a>
+                                <a class="nav-link text-light" asp-controller="Media" asp-action="Video">Видео</a>
                             </li>
 
                             <partial name="_AboutUsPartial" />
@@ -79,9 +81,9 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-light">
         <div class="container">
-            &copy; 2022 - Адреналин - <a asp-area="" asp-controller="Home" asp-action="Privacy">Поверителни изисквания</a>
+            &copy; 2022 - Адреналин - <a asp-area="" asp-controller="Home" asp-action="Privacy" class="nav-item text-dark" style="text-decoration:none;">Поверителни изисквания</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

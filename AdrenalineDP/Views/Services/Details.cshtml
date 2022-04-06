@@ -11,8 +11,14 @@
 @{
     ViewData["Title"] = "Details";
 }
-
-<h1>Детайли</h1>
+<style>
+    .absolute {
+        position: absolute;
+        top: 10%;
+        left: 5%;
+    }
+</style>
+<!--<h1>Детайли</h1>
 
 <div>
     <h4>@Model.Name</h4>
@@ -61,15 +67,31 @@
         </dd>
     </dl>
 </div>
-@if (SignInManager.IsSignedIn(User) && await UserManager.IsInRoleAsync(UserManager.GetUserAsync(User).Result, "admin"))
-{
-    <div>
-        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-outline-primary">Редактиране</a> |
-        <a asp-action="Index" class="btn btn-outline-secondary">Обратно към листа</a>
-    </div> }
-else
-{
-    <div>        
-        <a asp-action="Index" class="btn btn-outline-secondary">Обратно към услуги</a>
+    -->
+<div class="text-center">
+    <h1 class="text-center">@Model.Name</h1><br /><br />
+    @if (User.IsInRole("Admin") == false)
+    {
+        <a asp-controller="ServiceRequests" asp-action="Create" class="btn btn-success absolute" style="width:15%;">Резервирай</a><br />
+    }
+    <img src="@Model.ImageURL" style="width:95%" /><br /><br />
+
+    <div style="background:darkred;border-radius:15px;color:white;font-size:large">
+        <h2>@Html.DisplayNameFor(model => model.Description)</h2>
+        <p>@Model.Description</p>
     </div>
-}
+
+
+    @if (SignInManager.IsSignedIn(User) && await UserManager.IsInRoleAsync(UserManager.GetUserAsync(User).Result, "admin"))
+    {
+        <div>
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-outline-primary">Редактиране</a> |
+            <a asp-action="Index" class="btn btn-outline-secondary">Обратно към листа</a>
+        </div> }
+    else
+    {
+        <div>
+            <a asp-action="Index" class="btn btn-warning">Обратно към услуги</a>
+        </div>
+    }
+</div>
