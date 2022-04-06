@@ -16,7 +16,16 @@
         position: absolute;
         top: 10%;
         left: 5%;
+        
     }
+   body{
+       background-image:url(@Model.ImageURL);
+       background-size:cover;
+       object-fit:fill;
+       background-color:rgba(0,0,0,0.5);
+   }
+    
+   
 </style>
 <!--<h1>Детайли</h1>
 
@@ -70,13 +79,9 @@
     -->
 <div class="text-center">
     <h1 class="text-center">@Model.Name</h1><br /><br />
-    @if (User.IsInRole("Admin") == false)
-    {
-        <a asp-controller="ServiceRequests" asp-action="Create" class="btn btn-success absolute" style="width:15%;">Резервирай</a><br />
-    }
-    <img src="@Model.ImageURL" style="width:95%" /><br /><br />
 
-    <div style="background:darkred;border-radius:15px;color:white;font-size:large">
+
+    <div style="background:darkred;border-radius:15px;color:white;font-size:large;">
         <h2>@Html.DisplayNameFor(model => model.Description)</h2>
         <p>@Model.Description</p>
     </div>
@@ -93,5 +98,9 @@
         <div>
             <a asp-action="Index" class="btn btn-warning">Обратно към услуги</a>
         </div>
+    }
+    @if (User.IsInRole("Admin") == false)
+    {
+        <a asp-controller="ServiceRequests" asp-action="Create" class="btn btn-success" style="width:15%;">Резервирай</a><br />
     }
 </div>
