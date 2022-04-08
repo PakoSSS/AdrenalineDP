@@ -23,12 +23,12 @@
 @if (SignInManager.IsSignedIn(User) && await UserManager.IsInRoleAsync(UserManager.GetUserAsync(User).Result,"admin"))
 {
 <li class="nav-item dropdown show" data>
-    <a class="dropdown-toggle nav-link text-light" href="#" data-toggle="dropdown">Администрация</a>
+    <a class="dropdown-toggle nav-link text-light" href="#" data-toggle="dropdown"><i class="fa-solid fa-screwdriver-wrench"></i> Администрация</a>
     <div class="dropdown-menu">
-        <a class="dropdown-item text-light" asp-area="" asp-controller="Services" asp-action="Index">Услуги</a>
-        <a class="dropdown-item text-light" asp-area="" asp-controller="Instructors" asp-action="Index">Инструктори</a>
-        <a class="dropdown-item text-light" asp-area="" asp-controller="Media" asp-action="Index">Медия</a>
-        <a class="dropdown-item text-light" asp-area="" asp-controller="ServiceRequests" asp-action="Index">Резервации</a>
+        <a class="dropdown-item text-light" asp-area="" asp-controller="Services" asp-action="Index"><i class="fa-solid fa-fire-flame-curved"></i> Услуги</a>
+        <a class="dropdown-item text-light" asp-area="" asp-controller="Instructors" asp-action="Index"><i class="fa-solid fa-users"></i> Инструктори</a>
+        <a class="dropdown-item text-light" asp-area="" asp-controller="Media" asp-action="Index"><i class="fa-solid fa-photo-film"></i> Медия</a>
+        <a class="dropdown-item text-light" asp-area="" asp-controller="ServiceRequests" asp-action="Index"><i class="fa-solid fa-book-bookmark"></i> Резервации</a>
     </div>
 </li>
 }

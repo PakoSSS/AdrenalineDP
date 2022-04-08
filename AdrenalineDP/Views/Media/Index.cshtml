@@ -3,7 +3,7 @@
 @using Microsoft.AspNetCore
 @using AdrenalineDP.Data
 @using AdrenalineDP.Entities
- 
+
 
 @inject SignInManager<Users> SignInManager
 @inject UserManager<Users> UserManager
@@ -16,77 +16,78 @@
         background-color: #a40606;
         background-image: linear-gradient(315deg, #a40606 0%, #d98324 74%);
     }
-    th{
-        padding:5px;
-         
+
+    th {
+        padding: 5px;
     }
- 
 </style>
-@if (SignInManager.IsSignedIn(User) && await UserManager.IsInRoleAsync(UserManager.GetUserAsync(User).Result, "admin"))
-{
-    <h1>Медия</h1>
+<div class="container">
+    @if (SignInManager.IsSignedIn(User) && await UserManager.IsInRoleAsync(UserManager.GetUserAsync(User).Result, "admin"))
+    {
+        <div class="text-center">
+            <h1>Медия</h1>
 
-    <p>
-        <a asp-action="Create" class="btn btn-outline-info">Добавяне на медия</a>
-    </p>
-    <div class="text-center">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Title)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Service)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Category)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.FilePath)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Date)
-                    </th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
+            <p>
+                <a asp-action="Create" class="btn btn-outline-info">Добавяне на медия</a>
+            </p>
+
+            <table class="table">
+                <thead>
                     <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Title)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Service.Name)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Category)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.FilePath)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Date)
-                        </td>
-                        <td>
-                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-primary"><i class="fa fa-marker fa-lg"></i></a> |
-                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-success"><i class="fa-solid fa-book"></i></a> |
-                            <a asp-action="Delete" asp-route-id="@item.Id" class=" btn btn-outline-warning"><i class="fa fa-trash-alt fa-lg"></i></a>
-                        </td>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Title)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Service)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Category)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.FilePath)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Date)
+                        </th>
+                        <th></th>
                     </tr>
-                }
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Title)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Service.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Category)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FilePath)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Date)
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-primary"><i class="fa fa-marker fa-lg"></i></a> |
+                                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-success"><i class="fa-solid fa-book"></i></a> |
+                                <a asp-action="Delete" asp-route-id="@item.Id" class=" btn btn-outline-warning"><i class="fa fa-trash-alt fa-lg"></i></a>
+                            </td>
+                        </tr>
+                    }
 
 
 
-            </tbody>
-        </table>
-    </div>
-}
-else
-{
-    throw new InvalidOperationException("Нямате нужния достъп, за да редактирате тук");
-    
-}
- 
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        throw new InvalidOperationException("Нямате нужния достъп, за да редактирате тук");
+
+    }
+</div>

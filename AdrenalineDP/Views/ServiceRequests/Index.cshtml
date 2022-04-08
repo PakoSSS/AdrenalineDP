@@ -1,4 +1,12 @@
 ﻿@model IEnumerable<AdrenalineDP.Entities.ServiceRequest>
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore
+@using AdrenalineDP.Data
+@using AdrenalineDP.Entities
+
+
+@inject SignInManager<Users> SignInManager
+@inject UserManager<Users> UserManager
 
 @{
     ViewData["Title"] = "Index";
@@ -9,63 +17,73 @@
         background-color: #a40606;
         background-image: linear-gradient(315deg, #a40606 0%, #d98324 74%);
     }
-    th{
-        padding:5px;
+
+    th {
+        padding: 5px;
     }
 </style>
-<h1>Резервации</h1>
+<div class="container">
+    @if (User.IsInRole("Admin") == true)
+    {
+        <div class="text-center">
+            <h1>Резервации</h1>
 
-<p>
-    <a asp-action="Create" class="btn btn-outline-success">Добавяне на резервация</a>
-</p>
-<div class="text-center">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.User)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Service)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ReserveDate)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Message)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.RegisterDate)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.User.Full_Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Service.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ReserveDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Message)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.RegisterDate)
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-primary"><i class="fa fa-marker fa-lg"></i></a> |
-                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-success"><i class="fa-solid fa-book"></i></a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-warning"><i class="fa fa-trash-alt fa-lg"></i></a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+            <p>
+                <a asp-action="Create" class="btn btn-outline-success">Добавяне на резервация</a>
+            </p>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.User)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Service)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ReserveDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Message)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.RegisterDate)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.User.Full_Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Service.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ReserveDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Message)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.RegisterDate)
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-primary"><i class="fa fa-marker fa-lg"></i></a> |
+                                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-success"><i class="fa-solid fa-book"></i></a> |
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-warning"><i class="fa fa-trash-alt fa-lg"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>      }
+    else
+    {
+        throw new InvalidOperationException("Нямате нужния достъп да правите промени тук!");
+    }
 </div>

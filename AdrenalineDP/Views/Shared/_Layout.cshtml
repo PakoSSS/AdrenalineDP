@@ -23,6 +23,10 @@
             background-color: #a40606;
             background-image: linear-gradient(315deg, #a40606 0%, #d98324 74%);
         }
+       i{
+           font-size:13.5px;
+           margin-right:2.2px;
+       }
     </style>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -46,25 +50,25 @@
                         @if (User.IsInRole("Admin") == false)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-light" asp-controller="ServiceRequests" asp-action="Create">РЕЗЕРВАЦИЯ</a>
+                                <a class="nav-link text-light" asp-controller="ServiceRequests" asp-action="Create"><i class="fa-solid fa-book-open"></i>РЕЗЕРВАЦИЯ</a>
                             </li>
                         }
 
                         <li class="nav-item">
-                            <a class="nav-link text-monospace text-light" asp-area="" asp-controller="Home" asp-action="Index">Начало</a>
+                            <a class="nav-link text-monospace text-light" asp-area="" asp-controller="Home" asp-action="Index"><i class="fa-solid fa-house-chimney"></i>Начало</a>
                         </li>
                         @if (User.IsInRole("Admin") == false)
                         {
 
 
                             <li class="nav-item">
-                                <a class="nav-link text-light" asp-controller="Services" asp-action="Index">Услуги</a>
+                                <a class="nav-link text-light" asp-controller="Services" asp-action="Index"><i class="fa-solid fa-fire-flame-curved"></i>Услуги</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-light" asp-controller="Media" asp-action="Gallery">Галерия</a>
+                                <a class="nav-link text-light" asp-controller="Media" asp-action="Gallery"><i class="fa-solid fa-images"></i>Галерия</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-light" asp-controller="Media" asp-action="Video">Видео</a>
+                                <a class="nav-link text-light" asp-controller="Media" asp-action="Video"><i class="fa-solid fa-clapperboard"></i>Видео</a>
                             </li>
 
                             <partial name="_AboutUsPartial" />
@@ -79,7 +83,7 @@
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="container-fluid">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>

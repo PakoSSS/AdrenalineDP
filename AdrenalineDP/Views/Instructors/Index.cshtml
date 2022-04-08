@@ -16,9 +16,8 @@
     img {
         object-fit: cover;
         height: 15.5rem;
-
-
     }
+
     .card {
         background: darkred;
         color: white;
@@ -28,69 +27,71 @@
         background: darkred;
     }
 </style>
-@if (SignInManager.IsSignedIn(User) && await UserManager.IsInRoleAsync(UserManager.GetUserAsync(User).Result, "admin"))
-{
+<div class="container">
+    @if (SignInManager.IsSignedIn(User) && await UserManager.IsInRoleAsync(UserManager.GetUserAsync(User).Result, "admin"))
+    {
 
+        <div class="text-center">
+            <h1>Инструктори</h1>
 
-    <h1>Инструктори</h1>
+            <p>
+                <a asp-action="Create" class="btn btn-outline-dark">Добавяне на инструктор</a>
+            </p>
+            <br />
 
-    <p>
-        <a asp-action="Create" class="btn btn-outline-dark">Добавяне на инструктор</a>
-    </p>
-    <br />
-    <div class="text-center">
-        <div class="row">
-            @foreach (var item in Model)
-            {
-                <div class="col-4">
-                    <div class="card" style="width: 20rem;margin:1rem;">
-                        <img class="card-img-top" src="@item.ImageURL" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">@item.FirstName @item.LastName</h5>
-                            <p class="card-text">Квалификация : @item.Description</p>
+            <div class="row">
+                @foreach (var item in Model)
+                {
+                    <div class="col-4">
+                        <div class="card" style="width: 20rem;margin:1rem;">
+                            <img class="card-img-top" src="@item.ImageURL" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">@item.FirstName @item.LastName</h5>
+                                <p class="card-text">Квалификация : @item.Description</p>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item" style="background:darkred;border-color:white;">Дата на регистрация : @item.RegisterDate</li>
+                            </ul>
+                            <div class="card-body">
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-primary w-25"><i class="fa fa-marker fa-lg"></i></a>
+                                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-success w-25"><i class="fa-solid fa-book"></i></a>
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-warning text w-25"><i class="fa fa-trash-alt fa-lg"></i></a>
+
+                            </div>
                         </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item" style="background:darkred;border-color:white;">Дата на регистрация : @item.RegisterDate</li>
-                        </ul>
-                        <div class="card-body">
-                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-primary w-25"><i class="fa fa-marker fa-lg"></i></a>
-                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-success w-25"><i class="fa-solid fa-book"></i></a>
-                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-warning text w-25"><i class="fa fa-trash-alt fa-lg"></i></a>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="text-center">
+            <h1>Нашите прекрасни инструктори!</h1>
+            <p>
+                Всеки един от нашите инструктори е доказал своите знания и способности в своята професионална област.<br />
+                Ако ви е нужна помощ и подкрепа в дадено съоръжение,не се колебайте и се свържете с тях!
+                Ще бъдете посрещнати с точна информация и голяма топла усмивка!
+            </p>
+
+            <div class="row">
+                @foreach (var item in Model)
+                {
+                    <div class="col-4">
+                        <div class="card" style="width: 20rem;margin:1rem;">
+                            <img class="card-img-top" src="@item.ImageURL" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">@item.FirstName @item.LastName</h5>
+                                <p class="card-text">Квалификация : @item.Description</p>
+                            </div>
+
 
                         </div>
                     </div>
-                </div>
-            }
-        </div>
-    </div>
-}
-else
-{
-    <div class="text-center">
-        <h1>Нашите прекрасни инструктори!</h1>
-        <p>
-            Всеки един от нашите инструктори е доказал своите знания и способности в своята професионална област.<br />
-            Ако ви е нужна помощ и подкрепа в дадено съоръжение,не се колебайте и се свържете с тях!
-            Ще бъдете посрещнати с точна информация и голяма топла усмивка!
-        </p>
+                }
+            </div>
 
-        <div class="row">
-            @foreach (var item in Model)
-            {
-                <div class="col-4">
-                    <div class="card" style="width: 20rem;margin:1rem;">
-                        <img class="card-img-top" src="@item.ImageURL" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">@item.FirstName @item.LastName</h5>
-                            <p class="card-text">Квалификация : @item.Description</p>
-                        </div>
-
-
-                    </div>
-                </div>
-            }
         </div>
 
-    </div>
-
-}
+    }
+</div>

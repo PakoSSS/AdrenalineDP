@@ -12,71 +12,22 @@
 
 <style>
     .carousel-item {
-        height: 36rem;
+        height: 41rem;
         object-fit: cover;
     }
 
+    .welcome-img {
+        background: linear-gradient(rgba(0,0,0,0.9),rgba(0,0,0,0.3)),url(/images/welcome.jpg);
+        height: 100vh;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .para{
+        font:20px italic,verdana;
+    }
 </style>
-
-<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-    <ol class="carousel-indicators">
-        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
-    </ol>
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-            <div class="carousel-caption d-none d-md-block">
-                <h5>Best Bungee Jumping Ever!</h5>
-                <p>Join now!</p>
-            </div>
-            <img class="d-block w-100" src="~/images/carousel_img1.jpg" alt="First slide">
-        </div>
-        <div class="carousel-item">
-            <div class="carousel-caption d-none d-md-block">
-                <h5>Best Bungee Jumping Ever!</h5>
-                <p>Join now!</p>
-            </div>
-            <img class="d-block w-100" src="~/images/carousel_img2.jpg" alt="Second slide">
-        </div>
-        <div class="carousel-item">
-            <div class="carousel-caption d-none d-md-block">
-                <h5>Get On The Motors!</h5>
-                <p>Join now!</p>
-            </div>
-            <img class="d-block w-100" src="~/images/Motocross/moto1.jpg" alt="Third slide">
-        </div>
-        <div class="carousel-item">
-            <div class="carousel-caption d-none d-md-block">
-                <h5>Best Bungee Jumping Ever!</h5>
-                <p>Join now!</p>
-            </div>
-            <img class="d-block w-100" src="~/images/Cave-Diving/cd4.jpg" alt="Fourth slide">
-        </div>
-        <div class="carousel-item">
-            <div class="carousel-caption d-none d-md-block">
-                <h5>Best Bungee Jumping Ever!</h5>
-                <p>Join now!</p>
-            </div>
-            <img class="d-block w-100" src="~/images/Snowboard/snow5.jpg" alt="Fifth slide">
-        </div>
-    </div>
-
-    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
-</div>
- 
-
-
-
 @if (SignInManager.IsSignedIn(User) == true)
 {
     <div class="text-center">
@@ -92,13 +43,79 @@
 }
 else
 {
-<div>
-    <div class="text-center">
-        <h1>Добре дошли в Адреналин!</h1>
-        <p>
-            Моля влезте в акаунта си, за да видите всички наши услуги!
-            Ако все още нямате акаунт,регистрирайте се от <a class="btn btn-outline-secondary" asp-area="Identity" asp-page="/Account/Register">ТУК</a>
-        </p>
+   
+    <div class="welcome-img text-center img-fluid">
+        <div class="align-items-center justify-content-center">
+            <h1>Добре дошли в Адреналин!</h1>
+            <p class="para">
+                Потопете се в един свят на приключения и много силни емоции с нашите ексремни спортове!<br />
+                Моля влезте в акаунта си, за да видите всички наши услуги!<br /><br />
+                Ако все още нямате акаунт,регистрирайте се от <a class="btn btn-danger btn-outline-warning" style="width:10%;" asp-area="Identity" asp-page="/Account/Register">ТУК</a>
+            </p>
+        </div>
+    </div>
+}
+<div class="container-fluid" style="background:white;">
+    <br /><br />
+    <div class="container">
+
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Best Bungee Jumping Ever!</h5>
+                        <p>Join now!</p>
+                    </div>
+                    <img class="d-block w-100" src="~/images/carousel_img1.jpg" alt="First slide">
+                </div>
+                <div class="carousel-item">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Best Bungee Jumping Ever!</h5>
+                        <p>Join now!</p>
+                    </div>
+                    <img class="d-block w-100" src="~/images/carousel_img2.jpg" alt="Second slide">
+                </div>
+                <div class="carousel-item">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Get On The Motors!</h5>
+                        <p>Join now!</p>
+                    </div>
+                    <img class="d-block w-100" src="~/images/Motocross/moto1.jpg" alt="Third slide">
+                </div>
+                <div class="carousel-item">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Best Bungee Jumping Ever!</h5>
+                        <p>Join now!</p>
+                    </div>
+                    <img class="d-block w-100" src="~/images/Cave-Diving/cd4.jpg" alt="Fourth slide">
+                </div>
+                <div class="carousel-item">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Best Bungee Jumping Ever!</h5>
+                        <p>Join now!</p>
+                    </div>
+                    <img class="d-block w-100" src="~/images/Snowboard/snow5.jpg" alt="Fifth slide">
+                </div>
+            </div>
+
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+
     </div>
 </div>
-}
+
+
