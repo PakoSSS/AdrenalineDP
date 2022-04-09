@@ -3,6 +3,10 @@
 @{
     ViewData["Title"] = "Create";
 }
+@if (User.IsInRole("Admin") == false)
+{
+    throw new InvalidOperationException("Нямате нужния достъп, за да редактирате тук!");
+}
 <div class="text-center">
     <h1>Създаване</h1>
 

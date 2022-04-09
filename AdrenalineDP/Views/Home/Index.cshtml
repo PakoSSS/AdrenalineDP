@@ -18,14 +18,44 @@
 
     .welcome-img {
         background: linear-gradient(rgba(0,0,0,0.9),rgba(0,0,0,0.3)),url(/images/welcome.jpg);
+        background-size: cover;
         height: 100vh;
         color: white;
         display: flex;
         justify-content: center;
         align-items: center;
     }
-    .para{
-        font:20px italic,verdana;
+
+    .para {
+        font: 17px italic,verdana;
+        color: white;
+    }
+
+    .cont_prop {
+        background: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(/images/cont_img1.jpg);
+        background-size: cover;
+    }
+
+    .divider {
+        background: linear-gradient(rgba(0,0,0,0.85),rgba(0,0,0,0.91));
+        width: 100%;
+        height: 3rem;
+    }
+    h1{
+        color:white;
+    }
+    .para i{
+        font-size:23px;
+    }
+    .carousel-caption h5{
+        font:1.5rem italic,verdana;
+    }
+    .carousel-caption p {
+        font: 0.93rem italic,verdana;
+    }
+    .carous-op-img {
+        background: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.9));
+        border-radius:15px;
     }
 </style>
 @if (SignInManager.IsSignedIn(User) == true)
@@ -43,20 +73,27 @@
 }
 else
 {
-   
+
     <div class="welcome-img text-center img-fluid">
         <div class="align-items-center justify-content-center">
-            <h1>Добре дошли в Адреналин!</h1>
+            <h1>Добре дошли в Адреналин!</h1><br />
             <p class="para">
                 Потопете се в един свят на приключения и много силни емоции с нашите ексремни спортове!<br />
                 Моля влезте в акаунта си, за да видите всички наши услуги!<br /><br />
-                Ако все още нямате акаунт,регистрирайте се от <a class="btn btn-danger btn-outline-warning" style="width:10%;" asp-area="Identity" asp-page="/Account/Register">ТУК</a>
+                Ако все още нямате акаунт,регистрирайте се от <br /><br />
+                <i class="fa-solid fa-hand-point-right fa-lg"></i> <a class="btn btn-info btn-outline-warning" style="width:10%;" asp-area="Identity" asp-page="/Account/Register">ТУК</a> <i class="fa-solid fa-hand-point-left fa-lg"></i>
             </p>
         </div>
     </div>
+    <div class="divider"></div>
 }
-<div class="container-fluid" style="background:white;">
-    <br /><br />
+<div class="container-fluid cont_prop">
+    <br /><br /><br /><br />
+    <div class="text-center">
+        <h1>Най-вълнуващите дисциплини!</h1>
+        <p class="para">При нас може да намерите всичко,<br />което кара човек да се чувства наистина жив - силни емоции,преплетени с много страх</p>
+    </div>
+    <br />
     <div class="container">
 
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -70,36 +107,46 @@ else
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <div class="carousel-caption d-none d-md-block">
-                        <h5>Best Bungee Jumping Ever!</h5>
-                        <p>Join now!</p>
+                        <div class="carous-op-img">
+                            <h5>Най-доброто бънджи!</h5>
+                            <p>Резервирай сега!</p>
+                        </div>
                     </div>
                     <img class="d-block w-100" src="~/images/carousel_img1.jpg" alt="First slide">
                 </div>
                 <div class="carousel-item">
                     <div class="carousel-caption d-none d-md-block">
-                        <h5>Best Bungee Jumping Ever!</h5>
-                        <p>Join now!</p>
+                        <div class="carous-op-img">
+                            <h5>Обичаш височините? Парашутът е за теб!</h5>
+                            <p>Резервирай сега!</p>
+                        </div>
                     </div>
                     <img class="d-block w-100" src="~/images/carousel_img2.jpg" alt="Second slide">
                 </div>
                 <div class="carousel-item">
                     <div class="carousel-caption d-none d-md-block">
-                        <h5>Get On The Motors!</h5>
-                        <p>Join now!</p>
+                        <div class="carous-op-img">
+                            <h5>Скачай на мотора и се наслади на дивата природа!</h5>
+                            <p>Резервирай сега!</p>
+                        </div>
                     </div>
                     <img class="d-block w-100" src="~/images/Motocross/moto1.jpg" alt="Third slide">
                 </div>
                 <div class="carousel-item">
                     <div class="carousel-caption d-none d-md-block">
-                        <h5>Best Bungee Jumping Ever!</h5>
-                        <p>Join now!</p>
+                        <div class="carous-op-img">
+                            <h5>Изследвай морските дълбини!</h5>
+                            <p>Резервирай сега!</p>
+                        </div>
                     </div>
                     <img class="d-block w-100" src="~/images/Cave-Diving/cd4.jpg" alt="Fourth slide">
                 </div>
                 <div class="carousel-item">
                     <div class="carousel-caption d-none d-md-block">
-                        <h5>Best Bungee Jumping Ever!</h5>
-                        <p>Join now!</p>
+                        <div class="carous-op-img">
+                            <h5>Насалади се на смразяващо спускане със нашия сноуборд!</h5>
+                            <p>Резервирай сега!</p>
+                        </div>
                     </div>
                     <img class="d-block w-100" src="~/images/Snowboard/snow5.jpg" alt="Fifth slide">
                 </div>
@@ -116,6 +163,7 @@ else
         </div>
 
     </div>
+    <br /><br /><br /><br />
 </div>
 
 

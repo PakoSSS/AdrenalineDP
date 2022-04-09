@@ -3,6 +3,10 @@
 @{
     ViewData["Title"] = "Изтриване";
 }
+@if (User.IsInRole("Admin") == false)
+{
+    throw new InvalidOperationException("Нямате нужния достъп, за да редактирате тук!");
+}
 <div class="text-center">
     <h1>Изтриване</h1>
 
@@ -51,11 +55,11 @@
         </dd>
     </dl>
 </div>
-    <div class="text-center">
-        <form asp-action="Delete">
-            <input type="hidden" asp-for="Id" />
-            <input type="submit" value="Изтриване" class="btn btn-danger btn-outline-warning" /> |
-            <a asp-action="Index" class="btn btn-outline-secondary"><i class="fa-solid fa-hand-point-left fa-lg"></i> Обратно към листа</a>
-        </form>
-    </div>
+<div class="text-center">
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Изтриване" class="btn btn-danger btn-outline-warning" /> |
+        <a asp-action="Index" class="btn btn-outline-secondary"><i class="fa-solid fa-hand-point-left fa-lg"></i> Обратно към листа</a>
+    </form>
+</div>
 

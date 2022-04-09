@@ -11,7 +11,10 @@
 @{
     ViewData["Title"] = "Index";
 }
-
+@if (User.IsInRole("Admin") == false)
+{
+    throw new InvalidOperationException("Нямате нужния достъп, за да редактирате тук!");
+}
 <style>
     table {
         background-color: #a40606;
@@ -81,7 +84,7 @@
                     }
                 </tbody>
             </table>
-        </div>      }
+        </div>}
     else
     {
         throw new InvalidOperationException("Нямате нужния достъп да правите промени тук!");

@@ -3,6 +3,10 @@
 @{
     ViewData["Title"] = "Details";
 }
+@if (User.IsInRole("Admin") == false)
+{
+    throw new InvalidOperationException("Нямате нужния достъп, за да редактирате тук!");
+}
 <div class="text-center">
     <h1>Информация</h1>
     <h4>за медия</h4>

@@ -18,6 +18,9 @@
             background-color: rgb(83 39 39);
             text-shadow: rgb(83 39 39);
         }
+        .dropdown-item{
+            font-size:large;
+        }
     </style>
 
 @if (SignInManager.IsSignedIn(User) && await UserManager.IsInRoleAsync(UserManager.GetUserAsync(User).Result,"admin"))

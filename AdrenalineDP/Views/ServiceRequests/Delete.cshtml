@@ -3,6 +3,10 @@
 @{
     ViewData["Title"] = "Delete";
 }
+@if (User.IsInRole("Admin") == false)
+{
+    throw new InvalidOperationException("Нямате нужния достъп, за да редактирате тук!");
+}
 <div class="text-center">
     <h1>Изтриване</h1>
 
@@ -10,7 +14,7 @@
     <hr />
 </div>
 <div>
-     
+
     <div class="col-md-7 offset-md-5">
 
         <dl class="row">

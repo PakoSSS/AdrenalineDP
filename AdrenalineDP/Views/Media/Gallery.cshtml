@@ -26,15 +26,17 @@
     <h1>Галерия</h1>
 </div>
 <br />
-<div class="row">
-    @foreach (var item in Model)
-    {
-        if (item.Category == AdrenalineDP.Data.Enums.Category.Снимка)
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
         {
-            <div class="col-6">
-                <img src="@item.FilePath" class="card" alt="Invalid Image URL" onclick="" />
-            </div>
-        }
+            if (item.Category == AdrenalineDP.Data.Enums.Category.Снимка)
+            {
+                <div class="col-6">
+                    <img src="@item.FilePath" class="card" alt="Invalid Image URL" onclick="" />
+                </div>
+            }
 
-    }
+        }
+    </div>
 </div>

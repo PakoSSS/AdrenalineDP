@@ -21,14 +21,14 @@
     body {
         background: linear-gradient(rgba(0,0,0,0.9),rgba(0,0,0,0.3)),url( @Model.ImageURL );
         background-size: cover;
-        
+
     }
     .description {
         background:linear-gradient(rgba(128 128 128 / 0,56));
         border-radius: 15px;
         color: white;
         font-size: large;
-         
+
     }
 
 </style>
@@ -88,7 +88,7 @@
     <div class="col-md-4 offset-md-4">
         <br /><br /><br />
         <div class="description">
-            <h3>@Html.DisplayNameFor(model => model.Description)</h3>           
+            <h3>@Html.DisplayNameFor(model => model.Description)</h3>
             <p class="col-md-12">@Model.Description</p>
             <br />
             <h3>@Html.DisplayNameFor(model => model.Location) : @Model.Location</h3>
@@ -109,12 +109,10 @@
         else
         {
             <div>
+                <a asp-controller="ServiceRequests" asp-action="Create" class="btn btn-outline-success">Резервирай</a><br /><br />
                 <a asp-action="Index" class="btn btn-outline-secondary"><i class="fa-solid fa-hand-point-left fa-lg"></i> Обратно към услуги</a>
             </div>
         }
-        @if (User.IsInRole("Admin") == false)
-        {
-            <a asp-controller="ServiceRequests" asp-action="Create" class="btn btn-outline-success" style="width:25%;">Резервирай</a><br />
-        }
+
     </div>
 </div>
