@@ -32,21 +32,38 @@
         }
 
         .navbar-brand img {
-            width: 4.5rem;
-            height: 4.5rem;
-            object-fit: contain;
+            width: 100px;
+            height:100px;
+            object-fit: cover;
             filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(233deg) brightness(107%) contrast(101%);
+            background-color:transparent;
+            transition: .6s;
         }
-
-        .navbar-brand text {
-            font-family: 'Sitka Heading';
-            font-size: 1.5rem;
-        }
+            .navbar-brand img:hover {
+                color: rgb(83 39 39);
+                text-shadow: rgb(83 39 39);
+                transition: .6s;
+                -webkit-transform: scale(1.04);
+                -moz-transform: scale(1.04);
+                -o-transform: scale(1.04);
+                -ms-transform: scale(1.04);
+                transform: scale(1.04);
+            }
+             
 
         .nav-item {
-            font-size: large;
+            font-size:larger;
         }
-
+        .nav-link {
+            color:white;
+            text-shadow: rgb(83 39 39);
+            transition: .4s;
+        }
+            .nav-link:hover {
+                color: rgb(83 39 39);
+                text-shadow: rgb(83 39 39);
+                transition: .4s;
+            }
         .social #face {
             color: #3b5999;
             transition: .6s;
@@ -115,7 +132,7 @@
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
                     <div>
-                        <img src="~/images/adrenaline_badge.png" />
+                        <img src="~/images/logo.png" />
                     </div>
 
                 </a>
