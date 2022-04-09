@@ -3,13 +3,15 @@
 @{
     ViewData["Title"] = "Delete";
 }
+<div class="text-center">
+    <h1>Изтриване</h1>
 
-<h1>Изтриване</h1>
-
-<h3>Сигурни ли сте,че искате да изтриете този елемент?</h3>
-<div>
-    <h4>Медия</h4>
+    <h3>Сигурни ли сте,че искате да изтриете тази медия?</h3>
     <hr />
+</div>
+
+<div class="col-md-7 offset-md-5">
+
     <dl class="row">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Title)
@@ -42,10 +44,11 @@
             @Html.DisplayFor(model => model.Date)
         </dd>
     </dl>
-
+</div>
+<div class="text-center">
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Изтриване" class="btn btn-outline-danger" /> |
-        <a asp-action="Index" class="btn btn-outline-secondary">Обратно към листа</a>
+        <input type="submit" value="Изтриване" class="btn btn-danger btn-outline-warning" /> |
+        <a asp-action="Index" class="btn btn-outline-secondary"><i class="fa-solid fa-hand-point-left fa-lg"></i> Обратно към листа</a>
     </form>
 </div>

@@ -3,49 +3,54 @@
 @{
     ViewData["Title"] = "Delete";
 }
+<div class="text-center">
+    <h1>Изтриване</h1>
 
-<h1>Изтриване</h1>
-
-<h3>Сигурни ли сте,че искате да изтриете тази резервация?</h3>
-<div>
-    <h4>Резервация</h4>
+    <h3>Сигурни ли сте,че искате да изтриете тази резервация?</h3>
     <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.User)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.User.Full_Name)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Service)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Service.Name)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ReserveDate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ReserveDate)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Message)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Message)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.RegisterDate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.RegisterDate)
-        </dd>
-    </dl>
+</div>
+<div>
+     
+    <div class="col-md-7 offset-md-5">
 
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Изтриване" class="btn btn-outline-danger" /> |
-        <a asp-action="Index" class="btn btn-outline-secondary">Обратно към листа</a>
-    </form>
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.User)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.User.Full_Name)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Service)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Service.Name)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ReserveDate)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.ReserveDate)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Message)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Message)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.RegisterDate)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.RegisterDate)
+            </dd>
+        </dl>
+    </div>
+    <div class="text-center">
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="Id" />
+            <input type="submit" value="Изтриване" class="btn btn-danger btn-outline-warning" /> |
+            <a asp-action="Index" class="btn btn-outline-secondary"><i class="fa-solid fa-hand-point-left fa-lg"></i> Обратно към листа</a>
+        </form>
+    </div>
 </div>

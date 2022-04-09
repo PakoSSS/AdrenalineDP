@@ -13,13 +13,13 @@
 }
 @if (SignInManager.IsSignedIn(User) && await UserManager.IsInRoleAsync(UserManager.GetUserAsync(User).Result, "admin"))
 {
-
+<div class="text-center">
     <h1>Създаване</h1>
 
     <h4>Резервация</h4>
     <hr />
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-4 offset-md-4">
             <form asp-action="Create">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
@@ -46,23 +46,24 @@
                     <span asp-validation-for="RegisterDate" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Създаване" class="btn btn-outline-primary" />
+                    <input type="submit" value="Създаване" class="btn btn-primary" />
                 </div>
             </form>
         </div>
     </div>
 
     <div>
-        <a asp-action="Index" class="btn btn-outline-secondary">Обратно към листа</a>
+        <a asp-action="Index" class="btn btn-secondary"><i class="fa-solid fa-hand-point-left fa-lg"></i> Обратно към листа</a>
     </div>
+</div>
 }
 else
 {
-
+<div class="text-center">
     <h1>Резервация</h1>
     <hr />
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-4 offset-md-4">
             <form asp-action="Create">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group" hidden>
@@ -90,16 +91,17 @@ else
                 </div>
 
                 <div class="form-group">
-                    <input type="submit" value="Резервирай" class="btn btn-outline-primary" />
-                    
+                    <input type="submit" value="Резервирай" class="btn btn-primary" />
+
                 </div>
             </form>
         </div>
     </div>
 
     <div>
-        <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary">Отмяна на резервацията</a>
+        <a asp-controller="Home" asp-action="Index" class="btn btn-secondary"><i class="fa-solid fa-circle-xmark"></i> Отмяна на резервацията</a>
     </div>
+</div>
 }
 
 @section Scripts {

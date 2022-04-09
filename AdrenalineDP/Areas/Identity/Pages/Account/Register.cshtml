@@ -3,13 +3,13 @@
 @{
     ViewData["Title"] = "Регистрация";
 }
-
-<h1>@ViewData["Title"]</h1>
-
+<div class="text-center">
+    <h1>@ViewData["Title"]</h1>
+</div>
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4 offset-md-4">
         <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <h4>Създаване на нов акаунт.</h4>
+            <h4 class="text-center">Създаване на нов акаунт.</h4>
             <hr />
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
@@ -32,10 +32,12 @@
                 <input asp-for="Input.ConfirmPassword" class="form-control" />
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
-            <button type="submit" class="btn btn-primary">Регистрация</button>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Регистрация</button>
+            </div>
         </form>
     </div>
-    <div class="col-md-6 col-md-offset-2">
+    <div class="col-md-3 col-md-offset-2">
         <section>
             <h4>Информация</h4>
             <hr />
@@ -46,7 +48,7 @@
                         <p>
                             Със регистрацията си, вие се съгласявате данните ви да бъдат използвани,съгласно <b>Законът за защита на лични данни</b> и приемате нашите политики.
 
-                            За повече информацията,относно това как се използват данните ви, посетете <a href="https://www.cpdp.bg/?p=element&aid=1194">тази статия</a>.
+                            За повече информацията,относно това как се използват данните ви, посетете <a href="https://www.cpdp.bg/?p=element&aid=1194">тази страница</a>.
                         </p>
                     </div>
                 }

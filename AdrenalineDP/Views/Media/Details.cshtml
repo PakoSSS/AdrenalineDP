@@ -3,12 +3,14 @@
 @{
     ViewData["Title"] = "Details";
 }
-
-<h1>Детайли</h1>
-
-<div>
-    <h4>Медия</h4>
+<div class="text-center">
+    <h1>Информация</h1>
+    <h4>за медия</h4>
     <hr />
+</div>
+
+<div class="col-md-7 offset-md-5">
+
     <dl class="row">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Title)
@@ -42,7 +44,7 @@
         </dd>
     </dl>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-outline-primary">Редактиране</a> |
-    <a asp-action="Index" class="btn btn-outline-secondary">Обратно към листа</a>
+<div class="text-center">
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-outline-primary"><i class="fa fa-marker fa-lg"></i> Редактиране</a> |
+    <a asp-action="Index" class="btn btn-outline-secondary"><i class="fa-solid fa-hand-point-left fa-lg"></i> Обратно към листа</a>
 </div>
