@@ -68,6 +68,7 @@ namespace AdrenalineDP.Controllers
         {
             if (ModelState.IsValid)
             {
+                serviceRequest.UserId = _userManager.GetUserId(User);
                 _context.Add(serviceRequest);
                 await _context.SaveChangesAsync();
                 if (User.IsInRole("Admin"))
@@ -81,8 +82,8 @@ namespace AdrenalineDP.Controllers
                 }
 
             }
-            ViewData["ServiceId"] = new SelectList(_context.Services, "Id", "Name", serviceRequest.ServiceId);
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Full_Name", serviceRequest.UserId);
+           // ViewData["ServiceId"] = new SelectList(_context.Services, "Id", "Name", serviceRequest.ServiceId);
+           // ViewData["UserId"] = new SelectList(_context.Users, "Id", "Full_Name", serviceRequest.UserId);
             
             return View(serviceRequest);
         }
