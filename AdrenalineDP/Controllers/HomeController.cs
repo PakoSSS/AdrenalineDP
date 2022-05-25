@@ -22,6 +22,7 @@ namespace AdrenalineDP.Controllers
         {
             return View();
         }
+        
         public IActionResult AboutUs()
         {
             return View();

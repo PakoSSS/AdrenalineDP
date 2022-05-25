@@ -26,6 +26,24 @@
     .card-body {
         background: darkred;
     }
+    html::-webkit-scrollbar {
+        width: 20px;
+    }
+
+
+    html::-webkit-scrollbar-thumb {
+        width: 20px;
+        border-radius: 20px;
+        background: linear-gradient(315deg, #a40606 0%, #d98324 74%);
+    }
+
+    html::-webkit-scrollbar-track {
+        background-color: #333;
+    }
+
+    html::-webkit-scrollbar-thumb:hover {
+        background-image: linear-gradient(315deg, #a40606 0%, #d98324 74%);
+    }
 </style>
 <div class="container">
     @if (SignInManager.IsSignedIn(User) && await UserManager.IsInRoleAsync(UserManager.GetUserAsync(User).Result, "admin"))
@@ -50,7 +68,7 @@
                                 <p class="card-text">Квалификация : @item.Description</p>
                             </div>
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item" style="background:darkred;border-color:white;">Дата на регистрация : @item.RegisterDate</li>
+                                <li class="list-group-item" style="background:darkred;border-color:white;">Дата на регистрация :   @Html.DisplayFor(modelItem => item.RegisterDate)</li>
                             </ul>
                             <div class="card-body">
                                 <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-primary w-25"><i class="fa fa-marker fa-lg"></i></a>

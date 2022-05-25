@@ -48,7 +48,7 @@
                         <br />
                         @if (User.IsInRole("Admin") == true)
                         {
-                            <h3><i class="fa-solid fa-pen-to-square fa-lg"></i> @Html.DisplayNameFor(model => model.DateJoined) : @Model.DateJoined</h3>
+                    <h3><i class="fa-solid fa-pen-to-square fa-lg"></i> @Html.DisplayNameFor(model => model.DateJoined) :   @Html.DisplayFor(modelItem => modelItem.DateJoined)</h3>
                         }
 
                         <br />

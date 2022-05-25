@@ -2,6 +2,24 @@
         height: 41rem;
         object-fit: cover;
     }
+ .main-btn{
+     background-color:rgb(9 135 255);
+     padding-left:25px;
+     padding-right:25px;
+     border-radius:15px;
+     font-size:x-large;
+     text-decoration:none;
+     color:white;
+     transition:padding-left 0.6s, padding-right 0.6s,padding-top 0.6s, padding-bottom 0.6s, background-color 0.6s, color 0.6s;
+ }
+    .main-btn:hover {
+        background-color: yellow;
+        color: saddlebrown;
+        font-size:x-large;
+        text-decoration: none;
+        padding-left: 30px;
+        padding-right: 30px;
+    }
 
     .welcome-img {
         background: linear-gradient(rgba(0,0,0,0.9),rgba(0,0,0,0.3)),url(/images/welcome.jpg);
@@ -52,3 +70,23 @@
         margin-top:0px;
         margin-bottom:0px;
     }
+html::-webkit-scrollbar {
+    width: 20px;
+}
+
+
+html::-webkit-scrollbar-thumb {
+    width: 20px;
+    border-radius: 20px;
+    background: linear-gradient(315deg, #a40606 0%, #d98324 74%);
+}
+
+html::-webkit-scrollbar-track {
+    background-color: #333;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+    background-image: linear-gradient(315deg, #a40606 0%, #d98324 74%);
+}
+
+   

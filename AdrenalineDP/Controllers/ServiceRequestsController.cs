@@ -76,8 +76,7 @@ namespace AdrenalineDP.Controllers
                     return RedirectToAction(nameof(Index));
                 }
                 else
-                {
-
+                {                 
                     return RedirectToAction("Index", "Home");
                 }
 

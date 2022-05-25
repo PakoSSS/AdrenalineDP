@@ -11,99 +11,144 @@
 @{
     ViewData["Title"] = "Create";
 }
+<style>
+    .prog-pos {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        width: 70%;
+    }
+</style>
 @if (SignInManager.IsSignedIn(User) && await UserManager.IsInRoleAsync(UserManager.GetUserAsync(User).Result, "admin"))
 {
-<div class="text-center">
-    <h1>Създаване</h1>
+    <div class="text-center">
+        <h1>Създаване</h1>
 
-    <h4>Резервация</h4>
-    <hr />
-    <div class="row">
-        <div class="col-md-4 offset-md-4">
-            <form asp-action="Create">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group" hidden>
-                    <label asp-for="UserId" class="control-label"></label>
-                    <select asp-for="UserId" class="form-control" asp-items="ViewBag.UserId"></select>
-                </div>
-                <div class="form-group">
-                    <label asp-for="ServiceId" class="control-label"></label>
-                    <select asp-for="ServiceId" class="form-control" asp-items="ViewBag.ServiceId"></select>
-                </div>
-                <div class="form-group">
-                    <label asp-for="ReserveDate" class="control-label"></label>
-                    <input asp-for="ReserveDate" class="form-control" />
-                    <span asp-validation-for="ReserveDate" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Message" class="control-label"></label>
-                    <input asp-for="Message" class="form-control" />
-                    <span asp-validation-for="Message" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="RegisterDate" class="control-label"></label>
-                    <input asp-for="RegisterDate" class="form-control" />
-                    <span asp-validation-for="RegisterDate" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Създаване" class="btn btn-primary" />
-                </div>
-            </form>
+        <h4>Резервация</h4>
+        <hr />
+        <div class="row">
+            <div class="col-md-4 offset-md-4">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group" hidden>
+                        <label asp-for="UserId" class="control-label"></label>
+                        <select asp-for="UserId" class="form-control" asp-items="ViewBag.UserId"></select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ServiceId" class="control-label"></label>
+                        <select asp-for="ServiceId" class="form-control" asp-items="ViewBag.ServiceId"></select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ReserveDate" class="control-label"></label>
+                        <input asp-for="ReserveDate" class="form-control" />
+                        <span asp-validation-for="ReserveDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Message" class="control-label"></label>
+                        <input asp-for="Message" class="form-control" />
+                        <span asp-validation-for="Message" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="RegisterDate" class="control-label"></label>
+                        <input asp-for="RegisterDate" class="form-control" />
+                        <span asp-validation-for="RegisterDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Създаване" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div>
+            <a asp-action="Index" class="btn btn-secondary"><i class="fa-solid fa-hand-point-left fa-lg"></i> Обратно към листа</a>
         </div>
     </div>
-
-    <div>
-        <a asp-action="Index" class="btn btn-secondary"><i class="fa-solid fa-hand-point-left fa-lg"></i> Обратно към листа</a>
-    </div>
-</div>
 }
 else
 {
-<div class="text-center">
-    <h1>Резервация</h1>
-    <hr />
-    <div class="row">
-        <div class="col-md-4 offset-md-4">
-            <form asp-action="Create">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group" hidden>
-                    <label asp-for="UserId" class="control-label"></label>
-                    <select asp-for="UserId" class="form-control" asp-items="ViewBag.UserId"></select>
-                </div>
-                <div class="form-group">
-                    <label asp-for="ServiceId" class="control-label"></label>
-                    <select asp-for="ServiceId" class="form-control" asp-items="ViewBag.ServiceId"></select>
-                </div>
-                <div class="form-group">
-                    <label asp-for="ReserveDate" class="control-label"></label>
-                    <input asp-for="ReserveDate" class="form-control" />
-                    <span asp-validation-for="ReserveDate" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Message" class="control-label"></label>
-                    <input asp-for="Message" class="form-control" />
-                    <span asp-validation-for="Message" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="RegisterDate" class="control-label"></label>
-                    <input asp-for="RegisterDate" class="form-control" />
-                    <span asp-validation-for="RegisterDate" class="text-danger"></span>
-                </div>
+    <div class="text-center">
+        <h1>Резервация</h1>
+        <hr />
+        <div class="row">
+            <div class="col-md-4 offset-md-4">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group" hidden>
+                        <label asp-for="UserId" class="control-label"></label>
+                        <select asp-for="UserId" class="form-control" asp-items="ViewBag.UserId"></select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ServiceId" class="control-label"></label>
+                        <select asp-for="ServiceId" class="form-control" asp-items="ViewBag.ServiceId"></select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ReserveDate" class="control-label"></label>
+                        <input asp-for="ReserveDate" class="form-control" />
+                        <span asp-validation-for="ReserveDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Message" class="control-label"></label>
+                        <input asp-for="Message" class="form-control" />
+                        <span asp-validation-for="Message" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="RegisterDate" class="control-label"></label>
+                        <input asp-for="RegisterDate" class="form-control" />
+                        <span asp-validation-for="RegisterDate" class="text-danger"></span>
+                    </div>
 
-                <div class="form-group">
-                    <input type="submit" value="Резервирай" class="btn btn-primary" />
+                    <div class="form-group">
+                        <input type="submit" value="Резервирай" class="btn btn-primary" />
 
-                </div>
-            </form>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div>
+            <a asp-controller="Home" asp-action="Index" class="btn btn-secondary"><i class="fa-solid fa-circle-xmark fa-lg"></i> Отмяна на резервацията</a>
         </div>
     </div>
-
-    <div>
-        <a asp-controller="Home" asp-action="Index" class="btn btn-secondary"><i class="fa-solid fa-circle-xmark fa-lg"></i> Отмяна на резервацията</a>
+}
+<!--<div id="progressBaar" style="display:none;">
+    <div class="progress collapse">
+        <div class="progress-bar progress-bar-striped progress-bar-animated bg-info text-white" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width:100%; height:100%">
+            <span style="font-size:2rem;">Запазване на резервацията.....</span>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="alert alert-success alert-dismissible collapse text-center" style="font-size:2rem;" role="alert">
+            Успешно създавене на резервация!
+        </div>
+    </div>
+</div>-->
+<div class="prog-pos">
+    <div id="p-Loading" style="display:none" class="progress-bar progress-bar-animated progress-bar-striped align-items-center justify-content-center">
+        <span>Запазване на резервацията.....</span>
+    </div>
+    <div id="p-Success" style="display:none;" class="progress-bar progress-bar-animated progress-bar-striped bg-success align-items-center justify-content-center">
+        <span>Резервацията беше успешно запазена!</span>
     </div>
 </div>
-}
 
+
+<script>
+    function ShowBar() {
+
+        document.getElementById("p-Loading").style.display = "block";
+        setTimeout(() => {
+            document.getElementById("p-Loading").style.display = "none";
+            document.getElementById("p-Success").style.display = "block";
+        }, 3200);
+
+        setTimeout(() => {
+            document.getElementById("p-Success").style.display = "none";
+        }, 6200);
+        
+    }
+</script>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

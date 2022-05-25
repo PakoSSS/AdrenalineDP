@@ -23,6 +23,7 @@ namespace AdrenalineDP.Entities
         [Display(Name = "Снимка")]
         public string ImageURL { get; set; }
         [Required]
+        [DataType(DataType.Date)]
         [Display(Name = "Дата на вписване")]
         public DateTime RegisterDate { get; set; }
     }
